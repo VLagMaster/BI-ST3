@@ -1,5 +1,6 @@
 # BI-ST3
 just a bunch of random notes
+* https://petenetlive.com
 # Introduction
 ## Physical requirements
   * mini USB / serial
@@ -122,3 +123,43 @@ just a bunch of random notes
        * mode: Tun..
        * ...
     * Edit NAT to keep destination and source addressess between VPN networks
+# Connect to FirePower Module
+* commands:
+  * conf t
+  * sw-module module sfr
+  * sh module sfr
+  * session sfr console
+  * # jsme v hypervisoru
+  * expert # goes to shell mode
+  * show network
+  * configure network ipv4 manual 10.90.0.2 255.255.0.0 10.90.0.1
+  * show network
+  * # enable interface Management in GUI ASDM
+  * can connect via ASDM to FirePower
+# Firepower once again
+* default username: admin password: Admin123
+* can SSH to FirePower
+* GUI:
+  * ASA FirePOWER Configuration
+  * Policies
+    * Wont be used until commit changes and deployment
+  * Policies -> DNS
+    * block and allow DNS servers...
+    * ObjectManagement -> SecurityInteligence -> DNS Lists and Feeds
+  * Policies -> Identity Policy
+  * Policies -> Active Alerts
+  * Policies -> SSL
+    * MITM
+  * Policies -> Files
+    * can block specific file type, etc.
+  * Policies -> Intrusion Policy
+  * Policies -> Access Control Policy
+    * Can deploy changes of above
+    * ABOVE Deploy -> Deploy FirePOWER Changes
+    * Show progress of build
+      * Monitoring -> ASA FirePOWER Monitoring -> Task Status
+  * Tell ASA to send trafic to FirePower
+    * Configuration -> Firewall -> Service Policy Rules -> Add -> Global
+    * Description: FP-Inspection
+    * ASA FirePOWER Inspection
+    * Apply
