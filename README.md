@@ -73,3 +73,52 @@ just a bunch of random notes
     * comment all md5 references
     * install cisco asdm
     
+# GUI
+## BASIC
+  * dont forget NTP
+# SETUP 1
+ * client -> (eth0/2) ASA 5505
+ * ASA 5505 (eth0/0) -> Home router -> ISP
+ * ASA 5505
+  * NAT
+  * DHCP client (WAN)
+  * DHCP server (LAN)
+## DHCP
+ * Device Management -> DHCP server -> ...
+## DNS
+ * Device Management -> DNS server -> ...
+ * specify interfaces for lookup
+## NAT
+ * Firewall -> NAT rules -> Add Network object (right panel)
+   * RESERVE-INSIDE-NET
+     * Type: Network (IPv4)
+     * IP address: 10.90.0.0
+     * Mask: 255.255.0.0
+ * edit RESERVE-INSIDE-NET
+   * Show NAT
+   * Type: Dynamic PAT
+   * Translated Addr: interface ISP1
+   * save configuration
+ # SETUP 2
+  * DNS 10.0.0.8 -> FirePower 1010 (185.91.169.169)
+  * IP SEC to SETUP 1
+ ## SITE TO SITE VPN Client
+  * Wizzards -> VPN wizzards -> Site-to-site VPN wizzard...
+  * Peer IP address: 185.91.169.169
+  * VPN access interface: ISP1
+  * Traffic to protect:
+    * Local Network: RESERVE-INSIDE-NET
+    * Remote Network: NUPAKY--INSIDE-NETWORK
+   * Security
+     * Pre shared key
+   * Finish
+   * Edit
+     * IKE Policy manage...
+       * name: moucha
+       * Encryption: aes-256
+       * Hash: Sha256
+     * IPsec proposal Select...
+       * name: moucha
+       * mode: Tun..
+       * ...
+    * Edit NAT to keep destination and source addressess between VPN networks
